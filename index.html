@@ -1,0 +1,984 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f3eb">
+<meta name="description" content="یک اثر اختصاصی برای سحر؛ از طرف حمید، با عشق و افتخار.">
+<title>SAHAR — One of One</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper:#f7f3eb;
+  --paper2:#eee7db;
+  --ink:#24231f;
+  --muted:#81786b;
+  --gold:#b08b52;
+  --gold2:#d8bf8c;
+  --line:rgba(91,73,45,.22);
+  --white:#fffdf8;
+  --serif:"Cormorant Garamond",serif;
+  --sans:"Vazirmatn",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:300;
+  overflow-x:hidden
+}
+body.locked{overflow:hidden}
+button,a{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;object-fit:cover}
+::selection{background:var(--gold);color:white}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+#progress{
+  position:fixed;top:0;right:0;height:3px;width:0;
+  background:var(--gold);z-index:200
+}
+#loader{
+  position:fixed;inset:0;z-index:3000;
+  display:flex;align-items:center;justify-content:center;
+  background:#e9dfce;color:#29261f;
+  transition:opacity 1s,visibility 1s
+}
+#loader.hide{opacity:0;visibility:hidden}
+.loader-inner{text-align:center;padding:25px}
+.loader-line{width:150px;height:1px;background:#c6b28d;margin:28px auto;overflow:hidden}
+.loader-line:after{content:"";display:block;width:40%;height:100%;background:#6c5635;animation:loadline 1.5s ease-in-out infinite}
+@keyframes loadline{from{transform:translateX(250%)}to{transform:translateX(-350%)}}
+.loader-small{font-size:10px;letter-spacing:5px;color:#756448;direction:ltr}
+.loader-name{font-family:var(--serif);font-size:clamp(65px,14vw,125px);font-weight:400;line-height:1.2;direction:ltr}
+.loader-fa{font-size:13px;letter-spacing:2px}
+.topline{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 5vw;border-bottom:1px solid var(--line);
+  font-size:10px;letter-spacing:2px;color:var(--muted)
+}
+.topline .brand-mini{font-family:var(--serif);font-size:18px;letter-spacing:4px;color:var(--ink)}
+header{
+  position:sticky;top:0;z-index:100;background:rgba(247,243,235,.94);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--line)
+}
+.nav{
+  max-width:1500px;margin:auto;padding:16px 5vw;
+  display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+.logo{direction:ltr;font-family:var(--serif);font-size:28px;letter-spacing:4px;white-space:nowrap}
+.logo span{color:var(--gold)}
+.navlinks{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.navlinks button{
+  border:0;background:none;color:var(--muted);font-size:12px;
+  padding:7px 0;position:relative
+}
+.navlinks button:after{
+  content:"";position:absolute;right:0;bottom:0;height:1px;width:0;
+  background:var(--gold);transition:width .3s
+}
+.navlinks button:hover:after,.navlinks button.active:after{width:100%}
+.navlinks button.active{color:var(--ink)}
+.nav-cta{
+  border:1px solid var(--gold)!important;padding:10px 15px!important;
+  color:var(--ink)!important
+}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);padding:9px 12px}
+main{min-height:75vh}
+.page{display:none;animation:pagein .7s ease both}
+.page.active{display:block}
+@keyframes pagein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:1440px;margin:auto;padding-left:6vw;padding-right:6vw}
+.eyebrow{
+  font-size:10px;letter-spacing:3px;color:var(--gold);
+  display:flex;align-items:center;gap:12px
+}
+.eyebrow:before{content:"";width:32px;height:1px;background:var(--gold)}
+h1,h2,h3,p{margin-top:0}
+h1,h2,h3{font-weight:300}
+.serif{font-family:var(--serif);direction:ltr}
+.gold{color:var(--gold)}
+.muted{color:var(--muted)}
+.display{
+  font-size:clamp(45px,8vw,112px);line-height:1.05;
+  font-family:var(--serif);font-weight:300;direction:ltr
+}
+.display-fa{font-size:clamp(28px,4vw,53px);line-height:1.8;font-weight:300}
+.bodycopy{font-size:14px;line-height:2.5;color:#6e675d;max-width:580px}
+.rule{height:1px;background:var(--line);margin:35px 0}
+.button{
+  display:inline-flex;justify-content:center;align-items:center;gap:12px;
+  border:1px solid var(--gold);background:transparent;color:var(--ink);
+  padding:14px 22px;font-size:12px;transition:.3s
+}
+.button:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.button.dark{background:var(--ink);color:var(--white)}
+.button.dark:hover{background:var(--gold);border-color:var(--gold)}
+.arrow{font-size:19px;color:var(--gold)}
+/* HOME / CINEMATIC COVER */
+.hero{
+  min-height:min(850px,88vh);display:grid;
+  grid-template-columns:1fr 1fr;align-items:center;gap:4vw;
+  padding-top:55px;padding-bottom:65px
+}
+.hero-copy{position:relative;z-index:2}
+.hero-kicker{font-size:10px;letter-spacing:4px;direction:ltr;color:var(--gold)}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(85px,15vw,205px);
+  line-height:.82;letter-spacing:-5px;direction:ltr;font-weight:300;
+  margin:38px 0 25px
+}
+.hero-title span{display:block;color:var(--gold);font-style:italic;margin-left:12%}
+.hero-subtitle{font-size:clamp(17px,2.5vw,26px);line-height:2}
+.hero-copy .bodycopy{margin:20px 0 28px}
+.hero-visual{position:relative;min-height:560px;height:68vh;max-height:760px}
+.hero-image{
+  position:absolute;inset:0 7% 0 0;width:86%;height:100%;
+  object-fit:cover;filter:saturate(.75)
+}
+.hero-image-overlay{
+  position:absolute;inset:0 7% 0 0;
+  background:linear-gradient(180deg,rgba(20,17,12,.02),rgba(20,17,12,.14))
+}
+.hero-frame{
+  position:absolute;top:7%;right:0;width:88%;height:87%;
+  border:1px solid var(--gold2);pointer-events:none
+}
+.hero-number{
+  position:absolute;bottom:6%;left:0;writing-mode:vertical-rl;
+  font-family:var(--serif);font-size:13px;letter-spacing:4px;color:var(--gold)
+}
+.hero-caption{
+  position:absolute;bottom:8%;right:-2%;background:var(--paper);
+  padding:20px 24px;max-width:220px;box-shadow:0 15px 45px #00000010
+}
+.hero-caption b{display:block;font-weight:400;font-size:13px;margin-bottom:7px}
+.hero-caption span{font-size:10px;color:var(--muted);line-height:2}
+.intro-strip{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr)
+}
+.strip-item{padding:30px 5vw;border-left:1px solid var(--line)}
+.strip-item:last-child{border-left:0}
+.strip-label{font-size:10px;color:var(--muted);margin-bottom:12px}
+.strip-value{font-family:var(--serif);font-size:32px;direction:ltr}
+.strip-value small{font-family:var(--sans);font-size:12px;direction:rtl}
+/* SEPARATE PAGE HEADERS */
+.page-head{padding-top:100px;padding-bottom:65px;border-bottom:1px solid var(--line)}
+.page-head .display{margin:30px 0}
+.page-head .bodycopy{margin-right:auto}
+.section-label{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:10px;letter-spacing:2px;color:var(--muted);direction:ltr}
+.section-label span:last-child{direction:rtl;letter-spacing:0}
+/* STORY */
+.story-layout{
+  display:grid;grid-template-columns:.8fr 1.2fr;gap:9vw;
+  padding-top:90px;padding-bottom:110px
+}
+.story-side{position:relative}
+.story-side img{height:580px}
+.photo-note{padding:18px 0;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}
+.story-main{padding-top:20px}
+.story-quote{font-size:clamp(23px,3.2vw,40px);line-height:2;margin:25px 0 35px;font-weight:300}
+.date-card{
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;
+  padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)
+}
+.date-card .date-en{font-family:var(--serif);font-size:32px;direction:ltr}
+.date-card .date-fa{font-size:12px;color:var(--muted)}
+.elapsed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:35px}
+.time-box{border:1px solid var(--line);padding:20px 8px;text-align:center}
+.time-box strong{font-family:var(--serif);font-size:clamp(26px,4vw,44px);font-weight:400;display:block;direction:ltr}
+.time-box span{font-size:10px;color:var(--muted)}
+/* PRIDE */
+.pride{
+  display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center;
+  padding-top:90px;padding-bottom:110px
+}
+.pride-art{min-height:610px;position:relative}
+.pride-art img{height:610px}
+.pride-art:after{content:"";position:absolute;inset:22px -20px -20px 20px;border:1px solid var(--gold2);z-index:-1}
+.pride-letter{
+  position:absolute;bottom:30px;right:-10px;background:var(--paper);
+  padding:22px 28px;max-width:250px
+}
+.pride-letter .serif{font-size:35px}
+.pride-letter p{font-size:11px;color:var(--muted);margin:8px 0 0}
+.pride-copy .display{font-size:clamp(55px,8vw,105px)}
+.pride-copy blockquote{margin:35px 0;padding-right:22px;border-right:1px solid var(--gold);font-size:19px;line-height:2.4}
+.pride-copy p{font-size:13px;color:var(--muted);line-height:2.7}
+/* GALLERY */
+.gallery-intro{padding:60px 0 35px;display:flex;justify-content:space-between;gap:25px;align-items:end}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-bottom:100px}
+.gallery-card{position:relative;overflow:hidden;background:var(--paper2)}
+.gallery-card:nth-child(2){margin-top:65px}
+.gallery-card:nth-child(3){margin-top:120px}
+.gallery-card img{height:420px;transition:transform 1s,filter .5s;filter:saturate(.8)}
+.gallery-card:hover img{transform:scale(1.045);filter:saturate(1)}
+.gallery-card figcaption{padding:19px 15px;background:var(--white)}
+.gallery-card figcaption small{display:block;color:var(--gold);font-family:var(--serif);font-size:15px;direction:ltr}
+.gallery-card figcaption strong{font-size:12px;font-weight:400;display:block;margin-top:8px}
+.gallery-card figcaption p{font-size:10px;line-height:2;color:var(--muted);margin:8px 0 0}
+/* RING */
+.ring-page{background:#eee6d8}
+.ring-hero{padding:75px 0 30px;text-align:center}
+.ring-hero .display{font-size:clamp(55px,10vw,130px)}
+.ring-stage{
+  min-height:430px;display:flex;justify-content:center;align-items:center;
+  position:relative;overflow:hidden
+}
+.ring-stage:before{
+  content:"";position:absolute;width:min(78vw,540px);height:min(78vw,540px);
+  border:1px solid #c6af83;border-radius:50%;opacity:.4
+}
+.ring-stage:after{
+  content:"";position:absolute;width:min(60vw,400px);height:min(60vw,400px);
+  border:1px solid #c6af83;border-radius:50%;opacity:.3
+}
+.ring{
+  width:180px;height:180px;border:17px solid #c6a25f;border-radius:50%;
+  position:relative;transform:rotateX(65deg) rotateZ(-28deg);
+  box-shadow:inset 5px 5px 9px #fff3c5,inset -8px -9px 13px #735020,
+  9px 18px 20px #7c5e2838,0 0 0 5px #e7d3a4;
+  animation:ringfloat 5s ease-in-out infinite
+}
+.ring:before{
+  content:"";position:absolute;top:-27px;left:50%;transform:translateX(-50%);
+  width:36px;height:32px;background:linear-gradient(120deg,#fff,#d7d4ce,#fff);
+  clip-path:polygon(50% 0,100% 38%,83% 100%,17% 100%,0 38%);
+  box-shadow:0 0 25px #fff
+}
+.ring:after{
+  content:"";position:absolute;top:-30px;left:50%;transform:translateX(-50%);
+  width:13px;height:13px;border-radius:50%;
+  background:#fff;box-shadow:0 0 18px 8px #fff8
+}
+@keyframes ringfloat{0%,100%{transform:translateY(0) rotateX(65deg) rotateZ(-28deg)}50%{transform:translateY(-18px) rotateX(65deg) rotateZ(-15deg)}}
+.ring-caption{max-width:550px;margin:0 auto;padding:10px 24px 65px;text-align:center}
+.ring-caption .bodycopy{margin:20px auto}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:35px auto;max-width:620px}
+.countdown .time-box{background:#f7f3eb;border-color:#d8c9ad}
+.countdown .time-box strong{font-size:clamp(27px,5vw,46px)}
+.target-control{font-size:11px;color:var(--muted);margin-top:28px}
+.target-control input{
+  display:block;width:100%;max-width:250px;margin:12px auto;padding:12px;
+  background:#f7f3eb;border:1px solid var(--line);color:var(--ink)
+}
+/* LETTER */
+.letter-wrap{padding-top:80px;padding-bottom:110px;max-width:900px}
+.letter-paper{
+  background:var(--white);padding:clamp(25px,7vw,90px);
+  border:1px solid var(--line);box-shadow:0 25px 70px #3428170b;
+  position:relative
+}
+.letter-paper:before{content:"";position:absolute;inset:12px;border:1px solid #cbb58d;pointer-events:none}
+.letter-paper .display{font-size:clamp(50px,9vw,105px)}
+.letter-text{font-size:14px;line-height:3;color:#6c655b;position:relative}
+.signature{margin-top:55px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:end;gap:20px}
+.signature .serif{font-size:53px;color:var(--gold)}
+.signature small{font-size:10px;color:var(--muted)}
+/* THANKS */
+.thanks-hero{padding:100px 0 90px;text-align:center}
+.thanks-hero .display{font-size:clamp(70px,14vw,170px)}
+.thanks-hero .bodycopy{margin:25px auto}
+.credits{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);margin:0 auto 100px}
+.credit{padding:30px 18px;border-left:1px solid var(--line)}
+.credit:last-child{border-left:0}
+.credit small{display:block;color:var(--muted);font-size:10px;margin-bottom:13px}
+.credit strong{font-size:15px;font-weight:400}
+.credit .serif{font-size:28px;direction:ltr}
+/* FOOTER */
+footer{background:#24231f;color:#f7f3eb;padding:45px 6vw 25px}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:25px}
+.footer-logo{font-family:var(--serif);font-size:35px;letter-spacing:5px;direction:ltr}
+.footer-logo span{color:var(--gold2)}
+.footer-note{font-size:11px;line-height:2.3;color:#c1b8a8;max-width:300px}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;margin-top:40px;padding-top:18px;border-top:1px solid #ffffff20;font-size:9px;color:#aaa18f}
+.footer-bottom span{direction:ltr}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+ .reveal{opacity:1;transform:none}
+}
+@media(max-width:900px){
+ .navlinks{gap:13px}
+ .navlinks button{font-size:11px}
+ .hero{grid-template-columns:1fr 1fr;gap:20px}
+ .hero-visual{min-height:480px;height:60vh}
+ .hero-title{font-size:clamp(75px,13vw,140px)}
+ .story-layout{gap:5vw}
+ .story-side img{height:460px}
+ .pride{gap:5vw}
+ .pride-art,.pride-art img{height:500px;min-height:500px}
+ .gallery-card img{height:330px}
+}
+@media(max-width:650px){
+ .topline{padding:10px 5vw;font-size:8px}
+ .nav{padding:12px 5vw}
+ .logo{font-size:24px}
+ .menu-toggle{display:block}
+ .navlinks{
+  display:none;position:absolute;top:100%;right:0;left:0;
+  background:var(--paper);padding:22px 6vw;border-bottom:1px solid var(--line);
+  flex-direction:column;align-items:stretch;gap:15px
+ }
+ .navlinks.open{display:flex}
+ .navlinks button{text-align:right;padding:10px 0}
+ .nav-cta{text-align:center!important}
+ .hero{grid-template-columns:1fr;padding-top:30px;gap:25px}
+ .hero-copy{padding-top:15px}
+ .hero-title{font-size:clamp(85px,23vw,145px);margin:30px 0}
+ .hero-visual{height:65vh;min-height:400px;max-height:600px}
+ .hero-image{right:5%;width:90%}
+ .hero-frame{right:0;width:92%}
+ .hero-caption{right:0;bottom:5%;padding:15px}
+ .intro-strip{grid-template-columns:1fr}
+ .strip-item{padding:22px 6vw;border-left:0;border-bottom:1px solid var(--line)}
+ .strip-item:last-child{border-bottom:0}
+ .strip-value{font-size:28px}
+ .page-head{padding-top:65px;padding-bottom:40px}
+ .story-layout{grid-template-columns:1fr;padding-top:45px;padding-bottom:65px;gap:35px}
+ .story-side img{height:440px}
+ .story-main{padding-top:0}
+ .date-card .date-en{font-size:25px}
+ .elapsed-grid,.countdown{gap:6px}
+ .time-box{padding:15px 4px}
+ .time-box span{font-size:9px}
+ .pride{grid-template-columns:1fr;padding-top:50px;padding-bottom:65px;gap:50px}
+ .pride-art,.pride-art img{height:430px;min-height:430px}
+ .pride-copy{grid-row:1}
+ .gallery-intro{display:block;padding-top:40px}
+ .gallery-grid{grid-template-columns:1fr 1fr;gap:10px;padding-bottom:60px}
+ .gallery-card:nth-child(2),.gallery-card:nth-child(3){margin-top:0}
+ .gallery-card:nth-child(3){grid-column:1/-1;width:75%;margin:auto}
+ .gallery-card img{height:260px}
+ .gallery-card:nth-child(3) img{height:350px}
+ .gallery-card figcaption{padding:14px 10px}
+ .ring-hero{padding-top:60px}
+ .ring-stage{min-height:340px}
+ .ring{width:145px;height:145px;border-width:14px}
+ .letter-wrap{padding-top:45px;padding-bottom:65px}
+ .letter-paper{padding:30px 23px}
+ .letter-text{font-size:12px}
+ .signature{align-items:start;flex-direction:column}
+ .thanks-hero{padding:70px 0}
+ .credits{grid-template-columns:1fr;margin-bottom:60px}
+ .credit{border-left:0;border-bottom:1px solid var(--line);padding:22px 10px}
+ .credit:last-child{border-bottom:0}
+ .footer-top{align-items:start;flex-direction:column}
+ .footer-bottom{flex-direction:column}
+}
+</style>
+</head>
+<body class="locked">
+
+<div id="progress"></div>
+
+<div id="loader" role="status" aria-label="در حال آماده‌سازی تجربه">
+  <div class="loader-inner">
+    <div class="loader-small">A PERSONAL EDITION</div>
+    <div class="loader-name">SAHAR<span style="color:#b08b52">.</span></div>
+    <div class="loader-line"></div>
+    <div class="loader-fa">برای کسی که تکرار نمی‌شود</div>
+  </div>
+</div>
+
+<div class="topline">
+  <span>یک اثر شخصی، برای یک نفر</span>
+  <span class="brand-mini">S / H</span>
+  <span>EDITION 001 · ۱۴۰۵</span>
+</div>
+
+<header>
+  <nav class="nav" aria-label="منوی اصلی">
+    <a href="#home" class="logo" data-page="home">SAHAR<span>.</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false">☰</button>
+    <div class="navlinks" id="navlinks">
+      <button class="active" data-page="home">شروع</button>
+      <button data-page="story">داستان ما</button>
+      <button data-page="pride">افتخار من</button>
+      <button data-page="gallery">گالری</button>
+      <button data-page="future">تا رسیدن</button>
+      <button data-page="letter">نامه‌ای برای تو</button>
+      <button class="nav-cta" data-page="thanks">پایان این تجربه ↗</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- PAGE 01: HOME -->
+<section class="page active" id="home">
+  <div class="hero wrap">
+    <div class="hero-copy">
+      <div class="hero-kicker">A STORY THAT IS ONLY YOURS</div>
+      <h1 class="hero-title">SAHAR<span>One of One</span></h1>
+      <div class="hero-subtitle">برای سحر؛<br>دختری که بودنش، افتخار است.</div>
+      <p class="bodycopy">
+        بعضی آدم‌ها فقط وارد زندگی ما نمی‌شوند؛
+        به روزهای معمولی معنا می‌دهند و به آینده، شکل تازه‌ای.
+        این چند صفحه، برای یادآوری همین حقیقت ساخته شده‌اند.
+      </p>
+      <button class="button dark" data-page="story">ورود به داستان ما <span class="arrow">↗</span></button>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-image"
+        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85"
+        alt="تصویر ادیتوریال مد با نور طبیعی"
+        fetchpriority="high">
+      <div class="hero-image-overlay"></div>
+      <div class="hero-frame"></div>
+      <div class="hero-number">A UNIQUE PERSON · 001</div>
+      <div class="hero-caption">
+        <b>یک نفر، یک داستان، یک دنیا.</b>
+        <span>این صفحه برای شبیه بودن ساخته نشده؛ برای خاص بودن ساخته شده است.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-strip">
+    <div class="strip-item">
+      <div class="strip-label">روز آغاز داستان ما</div>
+      <div class="strip-value">21 JULY <small>۲۰۲۳</small></div>
+    </div>
+    <div class="strip-item">
+      <div class="strip-label">چیزی که می‌خواهم بدانی</div>
+      <div class="strip-value">I AM PROUD <small>به تو افتخار می‌کنم</small></div>
+    </div>
+    <div class="strip-item">
+      <div class="strip-label">نگاه من به آینده</div>
+      <div class="strip-value">TOGETHER <small>قدم‌به‌قدم، با هم</small></div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:90px;padding-bottom:100px">
+    <div class="section-label"><span>THE MEANING</span><span>معنای این هدیه</span></div>
+    <div class="rule"></div>
+    <div class="display reveal" style="max-width:950px">
+      Some things<br>are <i class="gold">priceless.</i>
+    </div>
+    <p class="bodycopy reveal" style="margin-top:30px">
+      ارزش بعضی چیزها با قیمت، اندازه یا ظاهرشان مشخص نمی‌شود.
+      گاهی یک جمله‌ی به‌موقع، یک دست گرفتن ساده، یا حضور یک نفر
+      می‌تواند از هر هدیه‌ای ماندگارتر باشد.
+    </p>
+    <button class="button reveal" data-page="pride">چیزی که باید درباره‌ی خودت بدانی ↗</button>
+  </div>
+</section>
+
+<!-- PAGE 02: STORY -->
+<section class="page" id="story">
+  <div class="page-head wrap">
+    <div class="eyebrow">CHAPTER 01 — OUR BEGINNING</div>
+    <h1 class="display">It started<br><i class="gold">with you.</i></h1>
+    <p class="bodycopy">۲۱ تیر ۱۴۰۲؛ تاریخی که برای من فقط یک عدد در تقویم نیست.</p>
+  </div>
+
+  <div class="story-layout wrap">
+    <aside class="story-side reveal">
+      <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1000&q=85"
+           alt="طلوع آفتاب و منظره‌ای آرام" loading="lazy">
+      <div class="photo-note">یک شروع، هزاران خاطره‌ی ممکن.</div>
+    </aside>
+
+    <div class="story-main">
+      <div class="eyebrow">21 / 04 / 1402</div>
+      <h2 class="display" style="font-size:clamp(48px,7vw,85px);margin:20px 0">Our timeline.</h2>
+      <p class="story-quote">
+        «از روزی که وارد زندگی هم شدیم،
+        داستانی شروع شد که هنوز صفحه‌های زیادی برای نوشتن دارد.»
+      </p>
+      <p class="bodycopy">
+        سحر جان، نمی‌خواهم وانمود کنم که تمام روزهای گذشته بی‌نقص بوده‌اند.
+        اما می‌خواهم بدانی که برای این مسیر، برای خاطره‌هایی که ساخته‌ایم
+        و برای آینده‌ای که آرزویش را داریم، ارزش قائلم.
+      </p>
+
+      <div class="date-card">
+        <div>
+          <div class="date-fa">تاریخ شروع آشنایی ما</div>
+          <div class="date-en">JUL 21, 2023</div>
+        </div>
+        <div class="gold">۰۱</div>
+      </div>
+      <div class="date-card">
+        <div>
+          <div class="date-fa">تاریخ مرجع این یادگاری</div>
+          <div class="date-en">OCT 28, 2026</div>
+        </div>
+        <div class="gold">۰۲</div>
+      </div>
+
+      <div class="rule"></div>
+      <div class="eyebrow">THE TIME WE SHARE</div>
+      <h3 style="font-size:22px;margin-top:20px">چند روز از شروع داستانمان گذشته؟</h3>
+      <p class="bodycopy">این شمارنده با تاریخ امروز دستگاه به‌روزرسانی می‌شود.</p>
+
+      <div class="elapsed-grid" id="elapsed">
+        <div class="time-box"><strong id="elapsedDays">—</strong><span>روز</span></div>
+        <div class="time-box"><strong id="elapsedYears">—</strong><span>سال کامل</span></div>
+        <div class="time-box"><strong id="elapsedMonths">—</strong><span>ماه باقی‌مانده</span></div>
+        <div class="time-box"><strong id="elapsedHours">—</strong><span>ساعت امروز</span></div>
+      </div>
+
+      <p class="bodycopy" style="margin-top:28px">
+        قرار نیست یک شمارنده، ارزش رابطه را اندازه بگیرد.
+        این فقط راه کوچکی است برای دیدن مسیری که تا امروز آمده‌ایم.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 03: PRIDE -->
+<section class="page" id="pride">
+  <div class="page-head wrap">
+    <div class="eyebrow">CHAPTER 02 — A NOTE OF PRIDE</div>
+    <h1 class="display">I am proud<br><i class="gold">of you.</i></h1>
+    <p class="bodycopy">این بخش برای یادآوری ارزش توست؛ نه فقط از نگاه من، بلکه مستقل از نظر هر کسی.</p>
+  </div>
+
+  <div class="pride wrap">
+    <div class="pride-art reveal">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=85"
+           alt="پرتره‌ی ادیتوریال یک زن با نور طبیعی" loading="lazy">
+      <div class="pride-letter">
+        <div class="serif gold">For Sahar.</div>
+        <p>با احترام به کسی که هستی و کسی که می‌خواهی بشوی.</p>
+      </div>
+    </div>
+
+    <div class="pride-copy">
+      <div class="eyebrow">READ THIS SLOWLY</div>
+      <h2 class="display">You are<br>enough.</h2>
+      <blockquote>
+        سحر جان، من به تو افتخار می‌کنم؛
+        به تلاش‌هایت، به قلبت، به چیزهایی که از سر گذرانده‌ای
+        و به راهی که برای آینده‌ات می‌سازی.
+      </blockquote>
+      <p>
+        نمی‌خواهم فقط وقتی همه‌چیز خوب پیش می‌رود، از تو تعریف کنم.
+        حتی روزهایی که خسته‌ای، اشتباه می‌کنی یا از حرف دیگران ناراحت می‌شوی،
+        ارزش تو کمتر نمی‌شود.
+      </p>
+      <p>
+        لازم نیست برای دوست‌داشتنی بودن همیشه قوی باشی.
+        لازم نیست به همه ثابت کنی که چقدر خوبی.
+        تو حق داری احساس داشته باشی، استراحت کنی، رشد کنی و برای خودت رویا بسازی.
+      </p>
+      <p>
+        من دوست دارم در مسیرت کنارت باشم؛ نه برای اینکه به‌جایت تصمیم بگیرم،
+        بلکه برای اینکه وقتی به آرزوهایت فکر می‌کنی، بدانی کسی هست که
+        به توانایی‌هایت باور دارد.
+      </p>
+      <button class="button dark" data-page="letter">یک نامه‌ی شخصی برای تو ↗</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 04: GALLERY -->
+<section class="page" id="gallery">
+  <div class="page-head wrap">
+    <div class="eyebrow">CHAPTER 03 — VISUAL JOURNAL</div>
+    <h1 class="display">Moments<br><i class="gold">in gold.</i></h1>
+    <p class="bodycopy">یک گالری با حال‌وهوای مجله‌های لوکس؛ برای عکس‌هایی که قرار است خاطره شوند.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="gallery-intro">
+      <div>
+        <div class="eyebrow">THE EDITORIAL</div>
+        <h2 class="display" style="font-size:clamp(40px,6vw,68px);margin:18px 0">A little collection.</h2>
+      </div>
+      <p class="bodycopy">این عکس‌ها نمونه‌های طراحی‌اند. می‌توانی آن‌ها را با تصاویر واقعی خود سحر و خاطرات دونفره‌تان عوض کنی.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <figure class="gallery-card reveal">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85"
+             alt="جزئیات استایل و لباس در نور طبیعی" loading="lazy">
+        <figcaption>
+          <small>01 / ELEGANCE</small>
+          <strong>زیبایی در جزئیات است.</strong>
+          <p>سادگی‌ای که برای دیده شدن نیاز به اغراق ندارد.</p>
+        </figcaption>
+      </figure>
+      <figure class="gallery-card reveal">
+        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=85"
+             alt="لحظه‌ای صمیمی میان دو نفر" loading="lazy">
+        <figcaption>
+          <small>02 / TOGETHER</small>
+          <strong>کنار هم، قدم‌به‌قدم.</strong>
+          <p>آینده با انتخاب‌های کوچک امروز ساخته می‌شود.</p>
+        </figcaption>
+      </figure>
+      <figure class="gallery-card reveal">
+        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=900&q=85"
+             alt="گل‌های روشن در سبک عکاسی ادیتوریال" loading="lazy">
+        <figcaption>
+          <small>03 / A GIFT</small>
+          <strong>برای روزهای قشنگ‌تر.</strong>
+          <p>یک یادگاری برای لحظه‌هایی که هنوز نرسیده‌اند.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="rule"></div>
+    <div class="section-label"><span>YOUR OWN MEMORIES</span><span>خاطرات واقعی شما</span></div>
+    <p class="bodycopy" style="margin:25px 0 50px">
+      برای شخصی‌سازی این قسمت، عکس‌های خودتان را با نام‌هایی مثل
+      <b>photo1.jpg</b> و <b>photo2.jpg</b> کنار فایل سایت قرار بده
+      و آدرس تصاویر داخل تگ‌های img را تغییر بده.
+    </p>
+  </div>
+</section>
+
+<!-- PAGE 05: FUTURE -->
+<section class="page" id="future">
+  <div class="ring-page">
+    <div class="ring-hero wrap">
+      <div class="eyebrow" style="justify-content:center">CHAPTER 04 — OUR NEXT CHAPTER</div>
+      <h1 class="display">The promise<br><i class="gold">of tomorrow.</i></h1>
+      <p class="bodycopy" style="margin:20px auto">
+        برای روزی که قرار است یک قدم جدی‌تر به آینده‌ای که می‌خواهیم نزدیک شویم.
+      </p>
+    </div>
+
+    <div class="ring-stage" aria-label="تصویر گرافیکی حلقه‌ی طلایی">
+      <div class="ring"></div>
+    </div>
+
+    <div class="ring-caption">
+      <div class="eyebrow" style="justify-content:center">NOT JUST A RING</div>
+      <h2 style="font-size:25px;margin-top:22px">یک نشانه از انتخابی که هر روز تکرار می‌شود.</h2>
+      <p class="bodycopy">
+        حلقه به‌تنهایی آینده را نمی‌سازد. احترام، صداقت، مسئولیت‌پذیری
+        و تلاش برای ساختن یک زندگی خوب هستند که به آن معنا می‌دهند.
+        امیدوارم با صبر و همراهی به روزهای قشنگمان برسیم.
+      </p>
+
+      <div class="rule"></div>
+      <div class="eyebrow" style="justify-content:center">COUNTDOWN TO OUR NEXT STEP</div>
+      <h3 style="font-size:21px;margin:20px 0 8px">تا روزی که برایش برنامه داریم</h3>
+      <p class="muted" style="font-size:11px;line-height:2">تاریخ هدف پیش‌فرض است؛ برای هماهنگ کردن آن با برنامه‌ی واقعی‌تان، تاریخ را تغییر بده.</p>
+
+      <div class="countdown" id="countdown">
+        <div class="time-box"><strong id="cdDays">—</strong><span>روز</span></div>
+        <div class="time-box"><strong id="cdHours">—</strong><span>ساعت</span></div>
+        <div class="time-box"><strong id="cdMinutes">—</strong><span>دقیقه</span></div>
+        <div class="time-box"><strong id="cdSeconds">—</strong><span>ثانیه</span></div>
+      </div>
+
+      <label class="target-control">
+        انتخاب تاریخ هدف
+        <input id="targetDate" type="date" value="2027-04-01" aria-label="تاریخ هدف شمارش معکوس">
+      </label>
+      <p id="targetMessage" aria-live="polite" style="font-size:11px;color:var(--muted);line-height:2"></p>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:70px;padding-bottom:90px">
+    <div class="section-label"><span>THE FUTURE IS BUILT</span><span>آینده را با هم می‌سازیم</span></div>
+    <div class="rule"></div>
+    <div class="display reveal">One day.<br><i class="gold">One step.</i></div>
+    <p class="bodycopy reveal" style="margin-top:25px">
+      این شمارش معکوس قول قطعی برای یک تاریخ خاص نیست؛
+      یادآوری آرزویی است که می‌خواهیم با برنامه‌ریزی، رضایت خانواده‌ها
+      و تلاش واقعی به آن نزدیک شویم.
+    </p>
+  </div>
+</section>
+
+<!-- PAGE 06: LETTER -->
+<section class="page" id="letter">
+  <div class="page-head wrap">
+    <div class="eyebrow">CHAPTER 05 — A LETTER FROM HAMID</div>
+    <h1 class="display">Dear<br><i class="gold">Sahar.</i></h1>
+    <p class="bodycopy">چند جمله که دوست دارم فقط برای تو بمانند.</p>
+  </div>
+
+  <div class="letter-wrap wrap">
+    <article class="letter-paper">
+      <div class="eyebrow">FOR YOUR EYES ONLY</div>
+      <h2 class="display" style="margin:35px 0">To my<br><i class="gold">favorite person.</i></h2>
+
+      <div class="letter-text">
+        سحر جانم،
+        <br><br>
+        شاید نتوانم همیشه با بهترین کلمات احساسم را توضیح بدهم،
+        اما می‌خواهم یک چیز را واضح بدانی: حضورت برای من ارزشمند است.
+        <br><br>
+        به تو افتخار می‌کنم؛ نه فقط به خاطر چیزهایی که به دست می‌آوری،
+        بلکه به خاطر تلاشی که می‌کنی، به خاطر رؤیاهایی که داری و به خاطر
+        اینکه حق داری هر روز بیشتر خودت را بشناسی و رشد کنی.
+        <br><br>
+        دوست دارم آینده‌ای بسازیم که در آن هر دوی ما احساس امنیت،
+        آرامش و احترام داشته باشیم. آینده‌ای که در آن بتوانیم حرف بزنیم،
+        اشتباه‌هایمان را بپذیریم، از هم یاد بگیریم و در روزهای سخت
+        همدیگر را تنها نگذاریم.
+        <br><br>
+        نمی‌خواهم این سایت فقط یک هدیه‌ی قشنگ باشد.
+        می‌خواهم یادگاری از روزهایی باشد که برای آینده‌مان آرزو داشتیم
+        و تصمیم گرفتیم برای ساختنش قدم برداریم.
+        <br><br>
+        ممنونم که بخشی از داستان زندگی منی.
+        امیدوارم روزهای قشنگ‌تری پیش رو داشته باشیم و هر کداممان
+        در کنار دیگری، خود واقعی‌مان بمانیم.
+        <br><br>
+        با عشق و احترام،
+      </div>
+
+      <div class="signature">
+        <div>
+          <div class="serif">Hamid.</div>
+          <small>MADE WITH LOVE & RESPECT</small>
+        </div>
+        <div style="text-align:left">
+          <small>برای سحر،</small><br>
+          <small>با افتخار به تو.</small>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PAGE 07: THANKS -->
+<section class="page" id="thanks">
+  <div class="thanks-hero wrap">
+    <div class="eyebrow" style="justify-content:center">THE END OF THIS EXPERIENCE</div>
+    <h1 class="display">Thank<br><i class="gold">you.</i></h1>
+    <p class="display-fa" style="margin:30px 0">ممنون که تا اینجا همراه ما بودید.</p>
+    <p class="bodycopy">
+      این وب‌سایت یک یادگاری شخصی است؛
+      ساخته‌شده برای قدردانی از سحر و یادآوری اینکه
+      بعضی آدم‌ها در زندگی ما جایگاهی ویژه دارند.
+      از تمام کسانی که وقت گذاشتند و این صفحات را دیدند، صمیمانه تشکر می‌کنم.
+    </p>
+    <button class="button dark" data-page="home">بازگشت به آغاز ↗</button>
+  </div>
+
+  <div class="credits wrap">
+    <div class="credit">
+      <small>CREATED BY</small>
+      <strong>طراح و سازنده</strong>
+      <div class="serif gold" style="margin-top:12px">HAMID.</div>
+    </div>
+    <div class="credit">
+      <small>DEDICATED TO</small>
+      <strong>تقدیم‌شده به</strong>
+      <div class="serif gold" style="margin-top:12px">SAHAR.</div>
+    </div>
+    <div class="credit">
+      <small>THE IDEA</small>
+      <strong>ایده‌ی اصلی</strong>
+      <div style="font-size:12px;margin-top:17px;line-height:2">یک داستان واقعی،<br>با امید به فردا.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">SAHAR<span>.</span></div>
+      <div style="font-size:10px;color:#b9aa8b;letter-spacing:3px;margin-top:10px">ONE OF ONE · PERSONAL EDITION</div>
+    </div>
+    <p class="footer-note">
+      ساخته‌شده با عشق، برای یادآوری یک حقیقت ساده:
+      آدم‌ها با احترام، توجه و همراهی ارزشمندتر می‌شوند.
+    </p>
+  </div>
+  <div class="footer-bottom">
+    <span>DESIGNED BY HAMID · 2026</span>
+    <span>یک یادگاری برای سحر، با عشق و احترام.</span>
+    <span>EDITION 001</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const pages = [...document.querySelectorAll(".page")];
+  const pageButtons = [...document.querySelectorAll("[data-page]")];
+  const navlinks = document.getElementById("navlinks");
+  const menuToggle = document.getElementById("menuToggle");
+  let currentPage = "home";
+
+  function showPage(id, updateHash = true) {
+    const target = document.getElementById(id);
+    if (!target || !target.classList.contains("page")) return;
+
+    currentPage = id;
+    pages.forEach(page => page.classList.toggle("active", page.id === id));
+
+    document.querySelectorAll(".navlinks button[data-page]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.page === id);
+    });
+
+    navlinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+
+    if (updateHash && location.hash !== "#" + id) {
+      history.pushState({page:id}, "", "#" + id);
+    }
+
+    window.scrollTo({top:0, behavior:"auto"});
+    observeReveals();
+  }
+
+  pageButtons.forEach(btn => {
+    btn.addEventListener("click", () => showPage(btn.dataset.page));
+  });
+
+  menuToggle.addEventListener("click", () => {
+    const opened = navlinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(opened));
+    menuToggle.textContent = opened ? "×" : "☰";
+  });
+
+  window.addEventListener("popstate", () => {
+    const id = location.hash.slice(1);
+    showPage(id || "home", false);
+  });
+
+  const initialPage = location.hash.slice(1);
+  if (initialPage && document.getElementById(initialPage)?.classList.contains("page")) {
+    showPage(initialPage, false);
+  }
+
+  // Cinematic intro
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loader").classList.add("hide");
+      document.body.classList.remove("locked");
+    }, 1600);
+  });
+
+  // Scroll progress
+  function updateProgress() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+    document.getElementById("progress").style.width = percent + "%";
+  }
+  window.addEventListener("scroll", updateProgress, {passive:true});
+
+  // Reveal effects
+  let revealObserver;
+  function observeReveals() {
+    if (revealObserver) revealObserver.disconnect();
+    const elements = document.querySelectorAll(".page.active .reveal");
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach(el => el.classList.add("visible"));
+      return;
+    }
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    elements.forEach(el => {
+      if (!el.classList.contains("visible")) revealObserver.observe(el);
+    });
+  }
+  observeReveals();
+
+  // Accurate elapsed calendar time, using the supplied Gregorian equivalent
+  // 21 Tir 1402 = 12 July 2023
+  const startDate = new Date(2023, 6, 12, 0, 0, 0);
+
+  function calendarDiff(start, end) {
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    let days = end.getDate() - start.getDate();
+
+    if (days < 0) {
+      months--;
+      const previousMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+      days += previousMonth.getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+    return {years, months, days};
+  }
+
+  function updateElapsed() {
+    const now = new Date();
+    const diffMs = now - startDate;
+    const wholeDays = Math.max(0, Math.floor(diffMs / 86400000));
+    const cal = calendarDiff(startDate, now);
+
+    document.getElementById("elapsedDays").textContent = wholeDays.toLocaleString("fa-IR");
+    document.getElementById("elapsedYears").textContent = Math.max(0, cal.years).toLocaleString("fa-IR");
+    document.getElementById("elapsedMonths").textContent = Math.max(0, cal.months).toLocaleString("fa-IR");
+    document.getElementById("elapsedHours").textContent = now.getHours().toLocaleString("fa-IR");
+  }
+
+  // Countdown target: adjustable by the user.
+  const targetInput = document.getElementById("targetDate");
+  let targetDate = new Date(2027, 3, 1, 0, 0, 0);
+
+  function updateCountdown() {
+    if (targetInput.value) {
+      const [y,m,d] = targetInput.value.split("-").map(Number);
+      targetDate = new Date(y, m - 1, d, 0, 0, 0);
+    }
+
+    const now = new Date();
+    let remaining = targetDate - now;
+    const message = document.getElementById("targetMessage");
+
+    if (!targetInput.value || Number.isNaN(targetDate.getTime())) {
+      message.textContent = "لطفاً یک تاریخ معتبر انتخاب کن.";
+      return;
+    }
+
+    if (remaining <= 0) {
+      document.getElementById("cdDays").textContent = "۰";
+      document.getElementById("cdHours").textContent = "۰۰";
+      document.getElementById("cdMinutes").textContent = "۰۰";
+      document.getElementById("cdSeconds").textContent = "۰۰";
+      message.textContent = "تاریخ انتخاب‌شده رسیده است؛ اگر برنامه تغییر کرده، تاریخ تازه‌ای انتخاب کن.";
+      return;
+    }
+
+    const days = Math.floor(remaining / 86400000);
+    remaining %= 86400000;
+    const hours = Math.floor(remaining / 3600000);
+    remaining %= 3600000;
+    const minutes = Math.floor(remaining / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
+
+    const fa = n => n.toLocaleString("fa-IR");
+    document.getElementById("cdDays").textContent = fa(days);
+    document.getElementById("cdHours").textContent = fa(hours);
+    document.getElementById("cdMinutes").textContent = fa(minutes);
+    document.getElementById("cdSeconds").textContent = fa(seconds);
+
+    message.textContent = "تاریخ هدف: " + targetDate.toLocaleDateString("fa-IR");
+  }
+
+  targetInput.addEventListener("change", updateCountdown);
+
+  updateElapsed();
+  updateCountdown();
+  setInterval(() => {
+    updateElapsed();
+    updateCountdown();
+  }, 1000);
+})();
+</script>
+</body>
+</html>
